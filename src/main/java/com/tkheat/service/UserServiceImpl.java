@@ -203,4 +203,44 @@ public class UserServiceImpl implements UserService{
 	public boolean updateGroupName(Users users) {
 		return userDao.updateGroupName(users);
 	}
+	@Override
+	public boolean deleteRecieveAlarm(Users users) {
+		return userDao.deleteRecieveAlarm(users);
+	}
+	@Override
+	public List<Users> getGroupRecieveAlarm(Users users) {
+		return userDao.getGroupRecieveAlarm(users);
+	}
+	@Override
+	public boolean insertCompany(Users users) {
+		return userDao.insertCompany(users);
+	}
+	@Override
+	public boolean insertCompanyAdmin(Users users) {
+		return userDao.insertCompanyAdmin(users);
+	}
+	@Override
+	public String selectNewCompanyCode(Users users) {
+		return userDao.selectNewCompanyCode(users);
+	}
+	@Override
+	public Users selectNewCompany(Users users) {
+		return userDao.selectNewCompany(users);
+	}
+	@Override
+	public boolean insertNewGroup(Users users) {
+		return userDao.insertNewGroup(users);
+	}
+	@Override
+	public boolean insertNewAlarmGroup(Users users) {
+		return userDao.insertNewAlarmGroup(users);
+	}
+	@Override
+	public List<Users> getCompanyNames(Users users) {
+		return userDao.getCompanyNames(users);
+	}
+	@Override
+	public boolean insertAlarmData(List<Users> datas) {
+		return userDao.insertAlarmData(datas);
+	}
 }

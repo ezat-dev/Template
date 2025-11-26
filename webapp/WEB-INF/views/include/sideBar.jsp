@@ -246,7 +246,11 @@
 	   
 		//loginUserMenuSetting();
 		//menuList();
+		if("${loginUser.user_role}" == '0'){
+			iframeSrc('/ezPublic/management/adminPage', '관리자 화면');
+			}else{
 		iframeSrc('/ezPublic/management/userinsert', '작업자 등록');
+			}
    });
 
 /* 	function loginUserMenuSetting(){

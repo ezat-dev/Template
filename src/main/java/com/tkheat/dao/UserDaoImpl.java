@@ -256,4 +256,68 @@ public class UserDaoImpl implements UserDao{
 		}
 		return true;
 	}
+	@Override
+	public boolean deleteRecieveAlarm(Users users) {
+		int result = sqlSession.delete("users.deleteRecieveAlarm", users);
+		if(result <= 0) {
+			return false;
+		}
+		return true;
+	}
+	@Override
+	public List<Users> getGroupRecieveAlarm(Users users) {
+		return sqlSession.selectList("users.getGroupRecieveAlarm",users);
+	}
+	@Override
+	public boolean insertCompany(Users users) {
+		int result = sqlSession.insert("users.insertCompany", users);
+		if(result <= 0) {
+			return false;
+		}
+		return true;
+	}
+	@Override
+	public boolean insertCompanyAdmin(Users users) {
+		int result = sqlSession.insert("users.insertCompanyAdmin", users);
+		if(result <= 0) {
+			return false;
+		}
+		return true;
+	}
+	@Override
+	public String selectNewCompanyCode(Users users) {
+		return sqlSession.selectOne("users.selectNewCompanyCode",users);
+	}
+	@Override
+	public Users selectNewCompany(Users users) {
+		return sqlSession.selectOne("users.selectNewCompany",users);
+	}
+	@Override
+	public boolean insertNewGroup(Users users) {
+		int result = sqlSession.insert("users.insertNewGroup", users);
+		if(result <= 0) {
+			return false;
+		}
+		return true;
+	}
+	@Override
+	public boolean insertNewAlarmGroup(Users users) {
+		int result = sqlSession.insert("users.insertNewAlarmGroup", users);
+		if(result <= 0) {
+			return false;
+		}
+		return true;
+	}
+	@Override
+	public List<Users> getCompanyNames(Users users) {
+		return sqlSession.selectList("users.getCompanyNames",users);
+	}
+	@Override
+	public boolean insertAlarmData(List<Users> datas) {
+		int result = sqlSession.insert("users.insertAlarmData", datas);
+		if(result <= 0) {
+			return false;
+		}
+		return true;
+	}
 }

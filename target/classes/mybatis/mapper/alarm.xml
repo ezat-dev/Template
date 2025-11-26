@@ -20,6 +20,7 @@
 		<select id="allAlarmList" parameterType="alarm"
 		resultType="alarm">
 		SELECT * FROM tb_alarm
+		WHERE company_code = #{company_code)
 	</select>
 	<!-- 알람 그룹 업데이트 -->
 <update id="updateAlarmGroup" parameterType="alarm">
@@ -39,7 +40,8 @@
 	<!-- 알람 그룹 이름 조회 -->
 <select id="getAlarmGroupName" parameterType="alarm"
 		resultType="alarm">
-SELECT * FROM tb_alarm_group;
+SELECT * FROM tb_alarm_group
+WHERE company_code = #{company_code}
 </select>
 <!-- 알람 조회(포함하는 그룹까지) -->
 	<select id="selectAlarmList" parameterType="alarm"
@@ -53,6 +55,7 @@ LEFT JOIN
     tb_alarm_group_mapping m ON a.alarm_address = m.alarm_address
 LEFT JOIN
     tb_alarm_group g ON m.alarm_group_id = g.alarm_group_id
+WHERE a.company_code = #{company_code}
 GROUP BY
     a.alarm_address
 ORDER BY

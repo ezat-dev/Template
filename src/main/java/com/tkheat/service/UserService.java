@@ -57,4 +57,14 @@ public interface UserService {
 	boolean updateGroupSchedule(Users users);
 	List<Users> getGroupName(Users users);
 	boolean updateGroupName(Users users);
+	boolean deleteRecieveAlarm(Users users);
+	List<Users> getGroupRecieveAlarm(Users users);
+	boolean insertCompany(Users users);
+	boolean insertCompanyAdmin(Users users);
+	String selectNewCompanyCode(Users users);
+	Users selectNewCompany(Users users);
+	boolean insertNewGroup(Users users);
+	boolean insertNewAlarmGroup(Users users);
+	List<Users> getCompanyNames(Users users);
+	boolean insertAlarmData(List<Users> datas);
 }

@@ -694,8 +694,8 @@ $(function() {
             });
         },
         error: function(xhr, status, error) {
-            console.error("알람 그룹 목록을 불러오는 데 실패했습니다:", error);
-            alert("알람 그룹 데이터 로드에 실패했습니다. 관리자에게 문의하세요.");
+            console.error("회원 그룹 목록을 불러오는 데 실패했습니다:", error);
+            alert("회원 그룹 데이터 로드에 실패했습니다. 관리자에게 문의하세요.");
         }
     });
 }
@@ -1015,21 +1015,23 @@ function getGroupName(groupId) {
   function getGroupName(groupId) {
       // 1: A, 2: B, ..., 5: E
       const groupNamess = {
-          1: groupNames[0].group_name, 2: groupNames[1].group_name, 3: groupNames[2].group_name, 
-          4: groupNames[3].group_name, 5: groupNames[4].group_name
+    	[groupNames[0].group_id]: groupNames[0].group_name, 
+    	[groupNames[1].group_id]: groupNames[1].group_name, 
+    	[groupNames[2].group_id]: groupNames[2].group_name, 
+    	[groupNames[3].group_id]: groupNames[3].group_name, 
+    	[groupNames[4].group_id]: groupNames[4].group_name
       };
-      // 매핑된 이름이 없으면 (예: 6 이상) 기본 그룹 ID를 반환하거나 '?' 등을 반환
       return groupNamess[groupId] || String(groupId); 
   }
 //그룹 ID에 따라 색상을 반환하는 함수 (새로 추가)
   function getGroupColor(groupId) {
       // 🎨 그룹별 색상 정의
       const groupColors = {
-          1: '#4CAF50', // 그룹 A: 그린 계열
-          2: '#2196F3', // 그룹 B: 블루 계열
-          3: '#FF9800', // 그룹 C: 오렌지 계열
-          4: '#673AB7', // 그룹 D: 퍼플 계열
-          5: '#E53935', // 그룹 E: 레드 계열
+    	[groupNames[0].group_id]: '#4CAF50', // 그룹 A: 그린 계열
+    	[groupNames[1].group_id]: '#2196F3', // 그룹 B: 블루 계열
+    	[groupNames[2].group_id]: '#FF9800', // 그룹 C: 오렌지 계열
+    	[groupNames[3].group_id]: '#673AB7', // 그룹 D: 퍼플 계열
+    	[groupNames[4].group_id]: '#E53935', // 그룹 E: 레드 계열
           // 기본값: 6번 이상의 그룹 ID를 위한 기본 색상
           default: '#607D8B' 
       };
@@ -1227,6 +1229,7 @@ function getGroupName(groupId) {
 	        ajaxURL: "/ezPublic/alarm/selectAlarmList", 
 	        placeholder: "조회된 데이터가 없습니다.",
 	        columns: [
+	        	{title: "NO", formatter: "rownum", hozAlign: "center", width: 250, headerFilter:true},
 		        {title: "알람 주소", field: "alarm_address", hozAlign: "center", width: 180, headerFilter:"select",
 		        	headerFilterParams:{
 		                values:{
@@ -1245,7 +1248,7 @@ function getGroupName(groupId) {
 	                    // 헤더 텍스트와 체크박스를 함께 반환
 	                    return '<span>'+alarmGroupNames[0].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },
-	                alarm_group_id:1,
+	                alarm_group_id:alarmGroupNames[0].alarm_group_id,
 	                //title: alarmGroupNames[0].alarm_group_name,
 	                field: "alarm_groups", 
 	                width: 110, 
@@ -1313,7 +1316,7 @@ function getGroupName(groupId) {
  		        		return '<span>'+alarmGroupNames[1].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },  
 	                //title: alarmGroupNames[1].alarm_group_name,
-	                alarm_group_id:2,
+	                alarm_group_id:alarmGroupNames[1].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -1380,7 +1383,7 @@ function getGroupName(groupId) {
  		        		return '<span>'+alarmGroupNames[2].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },  
 	                //title: alarmGroupNames[2].alarm_group_name,
-	                alarm_group_id:3,
+	                alarm_group_id:alarmGroupNames[2].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -1447,7 +1450,7 @@ function getGroupName(groupId) {
  		        		return '<span>'+alarmGroupNames[3].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },  
 	                //title: alarmGroupNames[3].alarm_group_name,
-	                alarm_group_id:4,
+	                alarm_group_id:alarmGroupNames[3].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -1514,7 +1517,7 @@ function getGroupName(groupId) {
         	    	  return '<span>'+alarmGroupNames[4].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                }, 
 	                //title: alarmGroupNames[4].alarm_group_name,
-	                alarm_group_id:5,
+	                alarm_group_id:alarmGroupNames[4].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -1581,7 +1584,7 @@ function getGroupName(groupId) {
  		        		return '<span>'+alarmGroupNames[5].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },  
 	                //title: alarmGroupNames[5].alarm_group_name,
-	                alarm_group_id:6,
+	                alarm_group_id:alarmGroupNames[5].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -1648,7 +1651,7 @@ function getGroupName(groupId) {
  		        		return '<span>'+alarmGroupNames[6].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },  
 	                //title: alarmGroupNames[6].alarm_group_name,
-	                alarm_group_id:7,
+	                alarm_group_id:alarmGroupNames[6].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -1715,7 +1718,7 @@ function getGroupName(groupId) {
  		        		return '<span>'+alarmGroupNames[7].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },  
 	                //title: alarmGroupNames[7].alarm_group_name,
-	                alarm_group_id:8,
+	                alarm_group_id:alarmGroupNames[7].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -1782,7 +1785,7 @@ function getGroupName(groupId) {
  		        		return '<span>'+alarmGroupNames[8].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },  
 	                //title: alarmGroupNames[8].alarm_group_name,
-	                alarm_group_id:9,
+	                alarm_group_id:alarmGroupNames[8].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -1849,7 +1852,7 @@ function getGroupName(groupId) {
  		        		return '<span>'+alarmGroupNames[9].alarm_group_name+'</span> <input type="checkbox" class="header-group-checkbox" style="width: 15px"> ';
 	                },  
 	                //title: alarmGroupNames[9].alarm_group_name,
-	                alarm_group_id:10,
+	                alarm_group_id:alarmGroupNames[9].alarm_group_id,
 	                field: "alarm_groups", 
 	                width: 110, 
 	                hozAlign: "center",
@@ -2002,17 +2005,23 @@ function getGroupName(groupId) {
 	        	{ title: "그룹 이름", field: "group_name", hozAlign: "center", width: 150},
 	            { 
 	                title: alarmGroupNames[0].alarm_group_name, 
-	                field: "recieve_a", 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[0].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2023,18 +2032,24 @@ function getGroupName(groupId) {
 	                cellClick: recieveAlarmpClick
 	            },
 	            { 
-	                title: alarmGroupNames[1].alarm_group_name,
-	                field: "recieve_b", 
+	                title: alarmGroupNames[1].alarm_group_name, 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[1].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2046,17 +2061,23 @@ function getGroupName(groupId) {
 	            },
 	            { 
 	                title: alarmGroupNames[2].alarm_group_name, 
-	                field: "recieve_c", 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[2].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2068,17 +2089,23 @@ function getGroupName(groupId) {
 	            },
 	            { 
 	                title: alarmGroupNames[3].alarm_group_name, 
-	                field: "recieve_d", 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[3].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2090,17 +2117,23 @@ function getGroupName(groupId) {
 	            },
 	            { 
 	                title: alarmGroupNames[4].alarm_group_name, 
-	                field: "recieve_e", 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[4].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2111,18 +2144,24 @@ function getGroupName(groupId) {
 	                cellClick: recieveAlarmpClick
 	            },
 	            { 
-	                title:  alarmGroupNames[5].alarm_group_name, 
-	                field: "recieve_f", 
+	                title: alarmGroupNames[5].alarm_group_name, 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[5].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2134,17 +2173,23 @@ function getGroupName(groupId) {
 	            },
 	            { 
 	                title: alarmGroupNames[6].alarm_group_name, 
-	                field: "recieve_g", 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[6].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2156,17 +2201,23 @@ function getGroupName(groupId) {
 	            },
 	            { 
 	                title: alarmGroupNames[7].alarm_group_name, 
-	                field: "recieve_h", 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[7].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2178,17 +2229,23 @@ function getGroupName(groupId) {
 	            },
 	            { 
 	                title: alarmGroupNames[8].alarm_group_name, 
-	                field: "recieve_I", 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[8].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2200,17 +2257,23 @@ function getGroupName(groupId) {
 	            },
 	            { 
 	                title: alarmGroupNames[9].alarm_group_name, 
-	                field: "recieve_j", 
+	                field: "recieve_alarm", 
 	                width: 120, 
 	                hozAlign: "center",
 	                // HTML 체크박스를 반환하는 formatter
 	                formatter: function(cell, formatterParams, onRender){
-	                	const groupValue = cell.getValue(); 
-	                    let isChecked = false;
+	                    const recievedAlarmIds = cell.getValue(); 
+	                    console.log("수신받는 알람: ", recievedAlarmIds);
 	                    
-				        if (groupValue == 1) { 
-				            isChecked = true;
-				        }
+	                    const targetAlarmId = alarmGroupNames[9].alarm_group_id;
+	                    console.log("열 알람: ", targetAlarmId);
+	                    let isChecked = false;
+
+	                        if (recievedAlarmIds && recievedAlarmIds.includes(targetAlarmId)) {
+		                        console.log("수신받음")
+	                            isChecked = true;
+	                        }
+	                    
 	                    console.log("isChecked: ", isChecked);
 	                    if (isChecked) {
 	                        return '<input type="checkbox" checked>';
@@ -2325,11 +2388,11 @@ function updateAllAlarmGroup(alarm_group_id, alarmAddresses, isChecked, headerCh
     
     // 2-2. 그룹 제목과 ID를 연결하는 맵 정의 (가장 확실한 방법)
     const groupIdMap = {
-    	[groupNames[0].group_name]: 1,
-    	[groupNames[1].group_name]: 2,
-    	[groupNames[2].group_name]: 3,
-    	[groupNames[3].group_name]: 4,
-    	[groupNames[4].group_name]: 5
+    	[groupNames[0].group_name]: groupNames[0].group_id,
+    	[groupNames[1].group_name]: groupNames[1].group_id,
+    	[groupNames[2].group_name]: groupNames[2].group_id,
+    	[groupNames[3].group_name]: groupNames[3].group_id,
+    	[groupNames[4].group_name]: groupNames[4].group_id
     };
     const group_id = groupIdMap[groupTitle];
     console.log("group_id: ", group_id);
@@ -2405,16 +2468,16 @@ function updateAllAlarmGroup(alarm_group_id, alarmAddresses, isChecked, headerCh
     
     // 2-2. 그룹 제목과 ID를 연결하는 맵 정의 (가장 확실한 방법)
     const alarmGroupIdMap = {
-    	[alarmGroupNames[0].alarm_group_name]: 1,
-    	[alarmGroupNames[1].alarm_group_name]: 2,
-    	[alarmGroupNames[2].alarm_group_name]: 3,
-    	[alarmGroupNames[3].alarm_group_name]: 4,
-    	[alarmGroupNames[4].alarm_group_name]: 5,
-    	[alarmGroupNames[5].alarm_group_name]: 6,
-    	[alarmGroupNames[6].alarm_group_name]: 7,
-    	[alarmGroupNames[7].alarm_group_name]: 8,
-    	[alarmGroupNames[8].alarm_group_name]: 9,
-    	[alarmGroupNames[9].alarm_group_name]: 10
+    	[alarmGroupNames[0].alarm_group_name]: alarmGroupNames[0].alarm_id,
+    	[alarmGroupNames[1].alarm_group_name]: alarmGroupNames[1].alarm_id,
+    	[alarmGroupNames[2].alarm_group_name]: alarmGroupNames[2].alarm_id,
+    	[alarmGroupNames[3].alarm_group_name]: alarmGroupNames[3].alarm_id,
+    	[alarmGroupNames[4].alarm_group_name]: alarmGroupNames[4].alarm_id,
+    	[alarmGroupNames[5].alarm_group_name]: alarmGroupNames[5].alarm_id,
+    	[alarmGroupNames[6].alarm_group_name]: alarmGroupNames[6].alarm_id,
+    	[alarmGroupNames[7].alarm_group_name]: alarmGroupNames[7].alarm_id,
+    	[alarmGroupNames[8].alarm_group_name]: alarmGroupNames[8].alarm_id,
+    	[alarmGroupNames[9].alarm_group_name]: alarmGroupNames[9].alarm_id
     };
     const alarm_group_id = cell.getColumn().getDefinition().alarm_group_id;
     console.log("alarm_group_id: ", alarm_group_id);
@@ -2527,6 +2590,18 @@ function updateAllAlarmGroup(alarm_group_id, alarmAddresses, isChecked, headerCh
         if (e.target.type !== 'checkbox') {
             return; 
         }
+        const alarmGroupIdMap = {
+            	[alarmGroupNames[0].alarm_group_name]: alarmGroupNames[0].alarm_group_id,
+            	[alarmGroupNames[1].alarm_group_name]: alarmGroupNames[1].alarm_group_id,
+            	[alarmGroupNames[2].alarm_group_name]: alarmGroupNames[2].alarm_group_id,
+            	[alarmGroupNames[3].alarm_group_name]: alarmGroupNames[3].alarm_group_id,
+            	[alarmGroupNames[4].alarm_group_name]: alarmGroupNames[4].alarm_group_id,
+            	[alarmGroupNames[5].alarm_group_name]: alarmGroupNames[5].alarm_group_id,
+            	[alarmGroupNames[6].alarm_group_name]: alarmGroupNames[6].alarm_group_id,
+            	[alarmGroupNames[7].alarm_group_name]: alarmGroupNames[7].alarm_group_id,
+            	[alarmGroupNames[8].alarm_group_name]: alarmGroupNames[8].alarm_group_id,
+            	[alarmGroupNames[9].alarm_group_name]: alarmGroupNames[9].alarm_group_id
+            };
         // e.target.checked는 클릭 후의 체크박스 상태 (true 또는 false)를 반환합니다.
         const isChecked = e.target.checked;
         const newValue = isChecked ? 1 : 0; // 서버에 보낼 값 (1 또는 0) 
@@ -2534,17 +2609,31 @@ function updateAllAlarmGroup(alarm_group_id, alarmAddresses, isChecked, headerCh
         const group_id = cell.getData().group_id; // 알람 고유 ID (PK)
         const columnField = cell.getColumn().getField(); // 클릭된 칼럼 이름 (예: "group_a", "group_b")
         const groupTitle = cell.getColumn().getDefinition().title; // 컬럼 제목 (예: "그룹 A")
-        console.log("알람 ID: ", group_id + ", 필드: ", columnField + ", 새 값: ", newValue);
+        const alarm_id = alarmGroupIdMap[groupTitle];
+        console.log("그룹 ID: ", group_id + ", 필드: ", columnField + ", 새 값: ", newValue + ",그룹 이름: ", groupTitle + ", 알람 ID: ", alarm_id);
 
         // 서버에 보낼 데이터
         const data = {
         	group_id: group_id,
             fieldName: columnField, // "group_a", "group_b" 등
-            newValue: newValue      // 1 또는 0
+            newValue: newValue,      // 1 또는 0
+            alarm_group_id: alarm_id
         };
+
+        let url;
+        let type;
+
+        if (newValue === 1) { 
+            url = '/ezPublic/user/updateRecieveAlarm';
+            type = 'POST';
+        } else { 
+            url = '/ezPublic/user/deleteRecieveAlarm';
+            type = 'POST';
+        }
+        
         $.ajax({
-            url: '/ezPublic/user/updateRecieveAlarm', 
-            type: 'POST',
+        	url: url,
+            type: type,
             contentType: 'application/json',
             data: JSON.stringify(data),
             

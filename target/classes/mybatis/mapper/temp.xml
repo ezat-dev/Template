@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="temp">
+
+<!-- 설비 하나의 온도 조회 -->
+<select id="getTempList" parameterType="temp"
+		resultType="temp">
+		SELECT * FROM tb_temp_state		
+		WHERE 1=1
+		<if test="mch_name != null and mch_name != ''">
+			AND mch_name = #{mch_name}
+		</if>
+		ORDER BY regtime DESC LIMIT 1
+</select>
+
+<!--  모든 설비 온도 조회  -->
+	<select id="getAllTempList" parameterType="temp"
+		resultType="temp">
+		SELECT * FROM tb_temp_state		
+		WHERE 1=1
+		<if test="mch_name != null and mch_name != ''">
+			AND mch_name = #{mch_name}
+		</if>
+		<if test="start_time != null and start_time != '' and end_time != null and end_time != ''">
+			AND regtime >= #{start_time} AND regtime <![CDATA[ <= ]]> #{end_time}
+		</if>
+	</select>
+</mapper>

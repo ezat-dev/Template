@@ -293,7 +293,7 @@ function pageObject(paramKey){
 	        success: function(response) {
 	            const loginUserPage = response.loginUserPage;
 	            userPermissions = loginUserPage || {};
-	            controlButtonPermissions(now_page_code);
+	            //controlButtonPermissions(now_page_code);
 	        },
 	        error: function(xhr, status, error) {
 	            console.error("데이터 가져오기 실패:", error);
@@ -304,7 +304,7 @@ function pageObject(paramKey){
 
 
 
-	function controlButtonPermissions(now_page_code) {
+/* 	function controlButtonPermissions(now_page_code) {
 	    const permission = userPermissions?.[now_page_code];
 	  //  console.log("현재 페이지 권한(permission):", permission);
 	
@@ -348,7 +348,7 @@ function pageObject(paramKey){
 	            e.stopImmediatePropagation();
 	        }
 	    });
-	}
+	} */
 
 
 

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -1106,7 +1107,10 @@ public class ManagementController {
 
 		return managementService.getSmallPageList(pageBig); 
 	}
-
+    @RequestMapping(value= "/management/adminPage", method = RequestMethod.GET)
+    public String adminPage(Model model) {
+        return "/management/adminPage.jsp"; 
+    }
 
 
 }

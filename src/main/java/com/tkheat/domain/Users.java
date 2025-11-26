@@ -39,7 +39,7 @@ public class Users {
 	private String device_token;
 	
 	//그룹
-	private Integer group_id;
+	private String group_id;
 	private String group_name;
 	private Integer user_group_id;
 	private String user_groups;
@@ -77,11 +77,36 @@ public class Users {
 	private String notice_dates;
 	private String notice_datee;
 	
+	private String company_code;
+	private String alarm_group_id;
+	private String recieve_alarm;
+	private String company_name;
 	
-	
-	
-	
-	
+
+	public String getCompany_name() {
+		return company_name;
+	}
+	public void setCompany_name(String company_name) {
+		this.company_name = company_name;
+	}
+	public String getRecieve_alarm() {
+		return recieve_alarm;
+	}
+	public void setRecieve_alarm(String recieve_alarm) {
+		this.recieve_alarm = recieve_alarm;
+	}
+	public String getAlarm_group_id() {
+		return alarm_group_id;
+	}
+	public void setAlarm_group_id(String alarm_group_id) {
+		this.alarm_group_id = alarm_group_id;
+	}
+	public String getCompany_code() {
+		return company_code;
+	}
+	public void setCompany_code(String company_code) {
+		this.company_code = company_code;
+	}
 	public String getSchedule_id() {
 		return schedule_id;
 	}
@@ -220,10 +245,10 @@ public class Users {
 	public void setUser_groups(String user_groups) {
 		this.user_groups = user_groups;
 	}
-	public Integer getGroup_id() {
+	public String getGroup_id() {
 		return group_id;
 	}
-	public void setGroup_id(Integer group_id) {
+	public void setGroup_id(String group_id) {
 		this.group_id = group_id;
 	}
 	public String getGroup_name() {

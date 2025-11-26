@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/ezPublic/css/login/style.css">
     <%@include file="include/pluginpage.jsp" %>
-    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <title>로그인</title>
 
     <style>

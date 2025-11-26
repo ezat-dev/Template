@@ -26,5 +26,6 @@
   	<mapper resource="mybatis/mapper/jeomgeom.xml"/>
   	<mapper resource="mybatis/mapper/monitoring.xml"/>
   	<mapper resource="mybatis/mapper/alarm.xml"/>
+  	<mapper resource="mybatis/mapper/temp.xml"/>
   </mappers>
 </configuration>
